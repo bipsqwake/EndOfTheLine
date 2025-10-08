@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Train : MonoBehaviour
 {
-    [SerializeField] private List<Carraige> carriages;
+    [SerializeField] private List<Carriage> carriages;
     private Locomotive locomotive;
 
     public void Awake()
@@ -11,7 +11,7 @@ public class Train : MonoBehaviour
         float position = 0;
         foreach (var carriage in carriages)
         {
-            Carraige instantiated = Instantiate(carriage, transform, false);
+            Carriage instantiated = Instantiate(carriage, transform, false);
             float halfLength = instantiated.GetComponentInChildren<SpriteRenderer>().size.x / 2;
             position += halfLength;
             instantiated.transform.localPosition = Vector3.left * position;

@@ -5,6 +5,8 @@ using UnityEngine;
 public class SidesInputController : MonoBehaviour
 {
     public static SidesInputController instance;
+    [Range(0.0f, 1.0f)]
+    public float sidesPart;
 
     public void Awake()
     {
@@ -17,7 +19,10 @@ public class SidesInputController : MonoBehaviour
     public event Action<bool> leftEvent;
     public event Action<bool> rightEvent;
 
-//AI Generated
+    //AI Generated
+    //Oh, I see a problem here
+    //If touch starts right and finished left something will happen
+    //Fix later
     void Update()
     {
         if (Input.touchCount > 0)
@@ -43,20 +48,21 @@ public class SidesInputController : MonoBehaviour
     void HandleTouch(Vector2 position, TouchPhase phase)
     {
         float screenWidth = Screen.width;
-        bool isLeft = position.x < screenWidth / 2f;
+        bool isLeft = position.x < screenWidth * sidesPart;
+        bool isRight = position.x > screenWidth * (1 - sidesPart);
 
         if (phase == TouchPhase.Began)
         {
             if (isLeft)
                 leftEvent?.Invoke(true);
-            else
+            else if (isRight)
                 rightEvent?.Invoke(true);
         }
         else if (phase == TouchPhase.Ended || phase == TouchPhase.Canceled)
         {
             if (isLeft)
                 leftEvent?.Invoke(false);
-            else
+            else if (isRight)
                 rightEvent?.Invoke(false);
         }
     }
