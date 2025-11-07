@@ -129,10 +129,10 @@ TextureImporter:
       name: Mortair - 1_0
       rect:
         serializedVersion: 2
-        x: 17
+        x: 20
         y: 0
-        width: 31
-        height: 24
+        width: 25
+        height: 23
       alignment: 9
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 4e3cd584c113e44d0b2e3b873ac27380
     internalID: 0
     vertices: []
     indices: 

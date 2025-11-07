@@ -304,11 +304,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Train
   carriages:
-  - {fileID: 6672558435830092194, guid: 795e17ddc017a432bb525aaa5dcdc846, type: 3}
-  - {fileID: 8168046736949431523, guid: a154661a838a245d7b8d20a790d8f9d3, type: 3}
-  - {fileID: 7752641511080878890, guid: 42915cc4a09ac496eb05af638dfc9f89, type: 3}
-  - {fileID: 8168046736949431523, guid: a154661a838a245d7b8d20a790d8f9d3, type: 3}
-  - {fileID: 137847180308966677, guid: 51e3c16778d0743eeb908fbcd6adeadc, type: 3}
+  - {fileID: 827291334687423425, guid: 795e17ddc017a432bb525aaa5dcdc846, type: 3}
+  - {fileID: 6684996232736356652, guid: a154661a838a245d7b8d20a790d8f9d3, type: 3}
+  - {fileID: 1409498382315559030, guid: cd5d72b19f81741e6a97b6df50f2cf44, type: 3}
+  - {fileID: 7708637111761463323, guid: 51e3c16778d0743eeb908fbcd6adeadc, type: 3}
+  - {fileID: 210506686324971454, guid: 78ef89df277ea412fbcbae5f397bf477, type: 3}
+  releasedPartPrefab: {fileID: 3115193988138342954, guid: 8f554278bad584edcaee0095eb7de638, type: 3}
 --- !u!114 &196710909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,37 +324,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrainManipulator
   delta: 1
   speed: 1
---- !u!1 &250372759
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 250372760}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &250372760
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 250372759}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.59, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1329539385}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &483423717
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,8 +593,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.27, y: -1.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1329539385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -641,11 +611,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Train
   carriages:
-  - {fileID: 6672558435830092194, guid: 795e17ddc017a432bb525aaa5dcdc846, type: 3}
-  - {fileID: 8168046736949431523, guid: a154661a838a245d7b8d20a790d8f9d3, type: 3}
-  - {fileID: 7752641511080878890, guid: 42915cc4a09ac496eb05af638dfc9f89, type: 3}
-  - {fileID: 7752641511080878890, guid: 42915cc4a09ac496eb05af638dfc9f89, type: 3}
-  - {fileID: 7752641511080878890, guid: 42915cc4a09ac496eb05af638dfc9f89, type: 3}
+  - {fileID: 827291334687423425, guid: 795e17ddc017a432bb525aaa5dcdc846, type: 3}
+  - {fileID: 1409498382315559030, guid: cd5d72b19f81741e6a97b6df50f2cf44, type: 3}
+  - {fileID: 1409498382315559030, guid: cd5d72b19f81741e6a97b6df50f2cf44, type: 3}
+  - {fileID: 1409498382315559030, guid: cd5d72b19f81741e6a97b6df50f2cf44, type: 3}
+  releasedPartPrefab: {fileID: 3115193988138342954, guid: 8f554278bad584edcaee0095eb7de638, type: 3}
 --- !u!1 &1022230556
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +869,6 @@ Transform:
   - {fileID: 154910535}
   - {fileID: 1517912319}
   - {fileID: 170825809}
-  - {fileID: 250372760}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1362110181
@@ -1022,6 +991,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1821968579}
+  - {fileID: 1681537193}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517912318
@@ -1125,6 +1095,7 @@ GameObject:
   - component: {fileID: 1681537193}
   - component: {fileID: 1681537192}
   - component: {fileID: 1681537194}
+  - component: {fileID: 1681537195}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1237,12 +1208,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681537191}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1465622786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1681537194
 MonoBehaviour:
@@ -1257,6 +1228,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   audioSource: {fileID: 1681537192}
+--- !u!114 &1681537195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681537191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26849617259b04724b5b4ab7c002bc88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SFXCollection
+  explotion: {fileID: 8300000, guid: e63543bb217ba43fa9b4b8bcfdf388e8, type: 3}
 --- !u!1 &1821968578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,4 +1341,3 @@ SceneRoots:
   - {fileID: 1930526097}
   - {fileID: 1329539385}
   - {fileID: 1465622786}
-  - {fileID: 1681537193}
