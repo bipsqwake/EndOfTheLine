@@ -4884,6 +4884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cart
   initHealth: 20
   damageView: {fileID: 0}
+  cartCollider: {fileID: 7285957226711558194}
 --- !u!1 &765380075064097190
 GameObject:
   m_ObjectHideFlags: 0
@@ -5114,8 +5115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmorCart
   initHealth: 10
-  damageView: {fileID: 0}
-  cartCollider: {fileID: 765380075064097190}
+  damageView: {fileID: 3286254437198196594}
+  carriageCollider: {fileID: 651001457960812807}
+  cart: {fileID: 1766104213679273659}
   aim: {fileID: 3398472414840286450}
   shield: {fileID: 1292953760462211642}
   reloadBar: {fileID: 6439144170264648729}
@@ -5204,7 +5206,7 @@ MonoBehaviour:
   shieldView: {fileID: 6143197800020856717}
   activationTime: 0.2
   activationWidth: 0.2
-  sfx: {fileID: 3407485166242179773}
+  sfx: {fileID: 0}
 --- !u!1 &5252048466499139051
 GameObject:
   m_ObjectHideFlags: 0
@@ -10469,6 +10471,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainPart
   cartView: {fileID: 5799371612284978173}
+  locomotive: {fileID: 0}
+  carriage: {fileID: 2591386818468704571}
+  cart: {fileID: 1766104213679273659}
+  carriageType: 2
 --- !u!114 &1010276328567575360
 MonoBehaviour:
   m_ObjectHideFlags: 0

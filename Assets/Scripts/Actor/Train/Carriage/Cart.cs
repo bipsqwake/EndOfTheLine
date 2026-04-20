@@ -4,6 +4,7 @@ using UnityEngine;
 public class Cart : Actor
 {
     [SerializeField] private DamageView damageView;
+    [SerializeField] private Collider2D cartCollider;
 
     public override void ReceiveDamage(int damage)
     {
@@ -17,6 +18,18 @@ public class Cart : Actor
         {
             DestroyCart();
         } 
+    }
+
+    public override void SetPlayerControl(bool playerControl)
+    {
+        base.SetPlayerControl(playerControl);
+        cartCollider.gameObject.layer = playerControl ? GlobalSettings.instance.playerLayer : GlobalSettings.instance.enemyLayer;
+    }
+
+
+    public void SetColliderActive(bool value)
+    {
+        cartCollider.gameObject.SetActive(value);
     }
     
     private void DestroyCart()

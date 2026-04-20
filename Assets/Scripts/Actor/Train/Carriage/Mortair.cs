@@ -21,7 +21,7 @@ public class Mortair : CarriagePayload
     }
     public void PrepareAttack(Vector2 aimPosition)
     {
-        if (!reloadBar.IsReady())
+        if (!playerControl || !reloadBar.IsReady())
         {
             return;
         }
@@ -29,9 +29,10 @@ public class Mortair : CarriagePayload
         SetCanonDirection(Mathf.Abs(aimPosition.x) < 0.3 ? 0 : (int)Mathf.Sign(aimPosition.x));
     }
 
+    //for player attacks
     public void PerformAttack(Vector2 aimPosition)
     {
-        if (!reloadBar.IsReady())
+        if (!playerControl || !reloadBar.IsReady())
         {
             return;
         }
@@ -46,8 +47,23 @@ public class Mortair : CarriagePayload
             SoundManager.instance.Play(shotSound);
             Projectile projectile = Instantiate(projectilePrefab);
             projectile.transform.position = transform.position + Vector3.up * gunY;
-            projectile.Init(GetAngle(aimPosition.x), ProjectileManager.instance.enemyGround.position.y);
+            projectile.Init(GetAngle(aimPosition.x), ProjectileManager.instance.enemyGround.position.y, GetTargetLayer());
+            ThreatManager.RegisterProjectileThreat(projectile);
         }
+    }
+
+    //for enemy attacks
+    public void PerformTargetAttack(Vector3 target)
+    {
+        if (playerControl)
+        {
+            return;
+        }
+        SoundManager.instance.Play(shotSound);
+        Projectile projectile = Instantiate(projectilePrefab);
+        projectile.transform.position = transform.position + Vector3.up * gunY;
+        //TODO: Add some noise to target location
+        projectile.Init(target - projectile.transform.position, ProjectileManager.instance.playerGround.position.y, GetTargetLayer());
     }
 
     private void SetCanonDirection(int direction)
@@ -59,5 +75,17 @@ public class Mortair : CarriagePayload
     private float GetAngle(float aimPositionX)
     {
         return Mathf.Lerp(0.0f, angleAmp, Mathf.Abs(aimPositionX)) * Mathf.Sign(aimPositionX);
+    }
+
+    public override void SetPlayerControl(bool playerControl)
+    {
+        base.SetPlayerControl(playerControl);
+
+        reloadBar.SetVisible(playerControl);
+    }
+
+    private int GetTargetLayer()
+    {
+        return playerControl ? GlobalSettings.instance.enemyLayer : GlobalSettings.instance.playerLayer;
     }
 }

@@ -48,7 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PassangerCarriage
   initHealth: 10
   damageView: {fileID: 2169229911285087514}
-  cartCollider: {fileID: 5647567012256017522}
+  carriageCollider: {fileID: 6321781289204351460}
+  cart: {fileID: 8928776199130287066}
 --- !u!1 &579398474873576556
 GameObject:
   m_ObjectHideFlags: 0
@@ -10076,6 +10077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cart
   initHealth: 10
   damageView: {fileID: 0}
+  cartCollider: {fileID: 3373678838033578268}
 --- !u!1 &5647567012256017522
 GameObject:
   m_ObjectHideFlags: 0
@@ -10233,6 +10235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainPart
   cartView: {fileID: 4427801138522640597}
+  locomotive: {fileID: 0}
+  carriage: {fileID: 4172542739052231648}
+  cart: {fileID: 8928776199130287066}
+  carriageType: 3
 --- !u!1 &6384072791610221945
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class TrainManipulator : MonoBehaviour
     {
         SidesInputController.instance.leftEvent += Left;
         SidesInputController.instance.rightEvent += Right;
+        
         defaultX = transform.position.x;
 
         Locomotive locomotive = GetComponent<Train>().GetLocomotive();
@@ -47,6 +48,8 @@ public class TrainManipulator : MonoBehaviour
         }
     }
 
+    //Manipulate
+
     public void Right(bool pressed)
     {
         if (pressed && acceleration == 0)
@@ -73,6 +76,25 @@ public class TrainManipulator : MonoBehaviour
             sparks.Activate(false);
         }
         SetSteam();
+    }
+
+    public void SetAcceleration(int acceleration)
+    {
+        this.acceleration = acceleration;
+        sparks.Activate(acceleration != 0);
+        SetSteam();
+    }
+
+    //Get info
+
+    public float GetPosition()
+    {
+        return transform.position.x - defaultX;
+    }
+
+    public float GetDelta()
+    {
+        return delta;
     }
 
     private void SetSteam()

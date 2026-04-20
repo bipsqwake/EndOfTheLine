@@ -198,7 +198,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Coalcart
   initHealth: 10
   damageView: {fileID: 501703171072764076}
-  cartCollider: {fileID: 2831305467773734542}
+  carriageCollider: {fileID: 3871456832665759134}
+  cart: {fileID: 4730533281943184055}
 --- !u!1 &3268197683294083713
 GameObject:
   m_ObjectHideFlags: 0
@@ -5173,6 +5174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cart
   initHealth: 40
   damageView: {fileID: 0}
+  cartCollider: {fileID: 2303433918633817842}
 --- !u!1 &5598385773497185751
 GameObject:
   m_ObjectHideFlags: 0
@@ -10355,6 +10357,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainPart
   cartView: {fileID: 2385629011668132950}
+  locomotive: {fileID: 0}
+  carriage: {fileID: 941302526667829720}
+  cart: {fileID: 4730533281943184055}
+  carriageType: 4
 --- !u!1001 &1026802722667779347
 PrefabInstance:
   m_ObjectHideFlags: 0

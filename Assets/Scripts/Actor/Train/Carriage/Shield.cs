@@ -27,16 +27,25 @@ public class Shield : MonoBehaviour
         .setOnComplete(StartCountdown, duration);
     }
 
+    public void SetLayer(int layer)
+    {
+        shieldCollider.gameObject.layer = layer;
+    }
+
     private void SetActive(bool activate)
     {
         shieldCollider.gameObject.SetActive(activate);
         shieldView.gameObject.SetActive(activate);
-        if (activate)
+        if (sfx != null)
         {
-            sfx.Play();
-        } else
-        {
-            sfx.Stop();
+            if (activate)
+            {
+                sfx.Play();
+            }
+            else
+            {
+                sfx.Stop();
+            }
         }
     }
 
@@ -67,9 +76,9 @@ public class Shield : MonoBehaviour
 
     private void StartCountdown(object time)
     {
-        StartCoroutine(Finish((float) time));
+        StartCoroutine(Finish((float)time));
     }
-    
+
     private IEnumerator Finish(float time)
     {
         yield return new WaitForSeconds(time);

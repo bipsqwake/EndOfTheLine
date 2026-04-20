@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Locomotive
   initHealth: 40
+  locomotiveCollider: {fileID: 1742589486230551005}
 --- !u!114 &-8005524545487409154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainPart
   cartView: {fileID: 469526448208783264}
+  locomotive: {fileID: 6672558435830092194}
+  carriage: {fileID: 0}
+  cart: {fileID: 0}
+  carriageType: 0
 --- !u!1 &2025452320879886144
 GameObject:
   m_ObjectHideFlags: 0

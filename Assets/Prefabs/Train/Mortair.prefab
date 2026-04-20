@@ -5572,6 +5572,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainPart
   cartView: {fileID: 7743325339374632219}
+  locomotive: {fileID: 0}
+  carriage: {fileID: 4884143506093258585}
+  cart: {fileID: 8103527341600982388}
+  carriageType: 1
 --- !u!1 &7152637740643071312
 GameObject:
   m_ObjectHideFlags: 0
@@ -5621,7 +5625,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Mortair
   initHealth: 10
   damageView: {fileID: 6843889258671621957}
-  cartCollider: {fileID: 8033975505820115577}
+  carriageCollider: {fileID: 5651152310220296351}
+  cart: {fileID: 8103527341600982388}
   sprites:
   - {fileID: 6888660573144406538, guid: 9f46445f303fa4f068326a2d75e06051, type: 3}
   - {fileID: -8426122373782763714, guid: 40cff041c044341c1a627c285d62f531, type: 3}
@@ -6072,6 +6077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cart
   initHealth: 40
   damageView: {fileID: 0}
+  cartCollider: {fileID: 4766874828801441393}
 --- !u!1 &8955857217070303035
 GameObject:
   m_ObjectHideFlags: 0

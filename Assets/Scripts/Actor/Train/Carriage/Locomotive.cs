@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class Locomotive : Actor
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private Collider2D locomotiveCollider;
     
+    public override void SetPlayerControl(bool playerControl)
+    {
+        base.SetPlayerControl(playerControl);
+        locomotiveCollider.gameObject.layer = playerControl ? GlobalSettings.instance.playerLayer : GlobalSettings.instance.enemyLayer;
+    }
 }

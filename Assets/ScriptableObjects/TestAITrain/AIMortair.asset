@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d73c7e51e90d409e8b6f6c3d5947dd5, type: 3}
+  m_Name: AIMortair
+  m_EditorClassIdentifier: Assembly-CSharp::AIMortair
+  carriagePrefab: {fileID: 7708637111761463323, guid: 51e3c16778d0743eeb908fbcd6adeadc, type: 3}
+  importance: 25
+  startDelayMin: 1
+  startDelayMax: 2
+  reloadMin: 5
+  reloadMax: 7
+  strategy: 0

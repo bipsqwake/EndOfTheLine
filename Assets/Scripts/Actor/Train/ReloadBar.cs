@@ -28,10 +28,18 @@ public class ReloadBar : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(ReloadCoroutine(reloadTime));
     }
-    
+
     public bool IsReady()
     {
         return ready;
+    }
+    
+    public void SetVisible(bool visible)
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(visible);
+        }
     }
 
     private void SetValue(int value)
