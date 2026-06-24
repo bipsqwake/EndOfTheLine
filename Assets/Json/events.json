@@ -1,0 +1,40 @@
+{
+    "startGameDialogue": {
+        "action": "DIALOGUE",
+        "value": "startGameDialogue",
+        "conditions": [
+            {
+                "anyOf": ["rejectTutorial", "sdfsdfsdf"],
+                "nextEvent": "firstStation"
+            },
+            {
+                "fallback": true,
+                "nextEvent": "tutorialEnemy"
+            }
+        ]
+    },
+    "tutorialEnemy": {
+        "action": "ENEMY",
+        "value": "tutorialEnemy",
+        "conditions": [
+            {
+                "fallback": true,
+                "nextEvent": "congratulations"
+            }
+        ]
+    },
+    "congratulations": {
+        "action": "DIALOGUE",
+        "value": "afterTutorial",
+        "conditions": [
+            {
+                "fallback": true,
+                "nextEvent": "firstStation"
+            }
+        ]
+    },
+    "firstStation": {
+        "action": "STATION",
+        "value": "firstStation"
+    }
+}

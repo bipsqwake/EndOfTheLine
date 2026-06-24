@@ -102,14 +102,14 @@ public class AITrainDefencePlaner
                 {
                     continue;
                 }
-                AIArmorCart cart = shieldActivation.Cart;
+                ArmorCart cart = shieldActivation.Cart;
                 if (IsProtectedByShield(target, cart))
                 {
                     shieldProtection = true;
                     break;
                 }
             }
-            foreach (AIArmorCart cart in trainAI.GetShieldCarts())
+            foreach (ArmorCart cart in train.GetShieldCarts())
             {
                 if (cart.GetActiveTimeLeft() > threat.GetTTI() && IsProtectedByShield(target, cart))
                 {
@@ -127,27 +127,25 @@ public class AITrainDefencePlaner
             {
                continue;
             }
-            AICarriage aiCarriage = trainAI.GetAICarriageByIndex(cartIndex);
-            TrainPart trainPart = aiCarriage.GetInstance();
-            max = Mathf.Max(CalculateTrainPartImpact(aiCarriage, threat.GetProjectile().GetDamage(), trainPart.IsCarriageDestroyed()), max);
+            TrainPart trainPart = train.GetTrainPartByIndex(cartIndex);
+            max = Mathf.Max(CalculateTrainPartImpact(trainPart, threat.GetProjectile().GetDamage(), trainPart.IsCarriageDestroyed()), max);
         }
         return max;
     }
 
-    private bool IsProtectedByShield(float target, AIArmorCart cart)
+    private bool IsProtectedByShield(float target, ArmorCart cart)
     {
-        return target < cart.GetInstance().transform.position.x + cart.GetShieldWidth() / 2 && 
-            target > cart.GetInstance().transform.position.x - cart.GetShieldWidth() / 2;
+        return target < cart.transform.position.x + cart.GetShieldWidth() / 2 && 
+            target > cart.transform.position.x - cart.GetShieldWidth() / 2;
     }
 
-    private float CalculateTrainPartImpact(AICarriage aiCarriage, float damage, bool cart)
+    private float CalculateTrainPartImpact(TrainPart trainPart, float damage, bool cart)
     {
-        if (aiCarriage == null)
+        if (trainPart == null)
         {
             return 0.0f;
         }
-        TrainPart trainPart = aiCarriage.GetInstance();
-        return (cart ? 30.0f : aiCarriage.GetImportance()) * damage * CustomMath.ExpDec(2.0f, 0.5f, trainPart.GetHealthPercent());
+        return (cart ? 30.0f : trainPart.GetImportance()) * damage * CustomMath.ExpDec(2.0f, 0.5f, trainPart.GetHealthPercent());
     }
 
     private List<DefencePlan> GenerateDefenceCandidates()
@@ -156,7 +154,7 @@ public class AITrainDefencePlaner
         List<DefencePlan> result = new();
         float current = manipulator.GetPosition();
         float nextStep = -manipulator.GetDelta();
-        List<List<DefencePlan.ShieldActivation>> shieldActivations = GenerateShieldActivations(trainAI.GetShieldCarts());
+        List<List<DefencePlan.ShieldActivation>> shieldActivations = GenerateShieldActivations(train.GetShieldCarts());
         while (nextStep < manipulator.GetDelta() + moveStep) 
         {
             float moveCost = Mathf.Abs(current - nextStep) * stepCost / moveStep;
@@ -167,17 +165,16 @@ public class AITrainDefencePlaner
             }
             nextStep += moveStep;
         }
-        Debug.Log(trainAI.GetShieldCarts().Count);
         return result;
     }
 
-    private List<List<DefencePlan.ShieldActivation>> GenerateShieldActivations(List<AIArmorCart> carts)
+    private List<List<DefencePlan.ShieldActivation>> GenerateShieldActivations(List<ArmorCart> carts)
     {
         if (carts.Count == 0)
         {
-            return new();
+            return new() {new ()};
         }
-        AIArmorCart currentCart = carts[0];
+        ArmorCart currentCart = carts[0];
         carts.Remove(currentCart);
         List<List<DefencePlan.ShieldActivation>> result = new();
         List<List<DefencePlan.ShieldActivation>> next = GenerateShieldActivations(carts);
@@ -200,7 +197,7 @@ public class AITrainDefencePlaner
 
     }
 
-    private List<List<DefencePlan.ShieldActivation>> GenerateCartShieldActivations(AIArmorCart cart)
+    private List<List<DefencePlan.ShieldActivation>> GenerateCartShieldActivations(ArmorCart cart)
     {
         List<List<DefencePlan.ShieldActivation>> result = new()
         {

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Dialogues Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Dialogues
+  m_TableCollectionNameGuidString: c88d164ac2fdb49e9af383d5d9fd6c78
+  m_Entries:
+  - m_Id: 4304273399808
+    m_Key: engineer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4304306954240
+    m_Key: startGameDialogue_greeteng
+    m_Metadata:
+      m_Items: []
+  - m_Id: 134665850576896
+    m_Key: startGameDialogue_tutorialPropose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4304311148545
+    m_Key: startGameDialogue_answer_acceptTutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4304311148546
+    m_Key: startGameDialogue_answer_rejectTutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4304311148547
+    m_Key: startGameDialogue_prepareTutorail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4304311148548
+    m_Key: startGameDialogue_rejectTutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3204242079735808
+    m_Key: afterTutorial_congratulations
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5359600773351866646
+  references:
+    version: 2
+    RefIds:
+    - rid: 5359600773351866646
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1777123279262

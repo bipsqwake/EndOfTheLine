@@ -8,6 +8,8 @@ public class GlobalSettings : MonoBehaviour
     public int playerLayer;
     public int enemyProjectileLayer;
     public int playerProjectileLayer;
+    public Transform enemyOutPosition;
+    public Transform gameRoot;
     public void Awake()
     {
         if (instance != null)

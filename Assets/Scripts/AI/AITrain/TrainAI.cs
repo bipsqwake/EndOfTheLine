@@ -6,28 +6,22 @@ using UnityEngine;
 [RequireComponent(typeof(Train), typeof(AITrainManipulator))]
 public class TrainAI : AI
 {
-    [SerializeField] private List<AICarriage> carriages;
-    [SerializeField] private float cartImportance;
-    [Range(0, 1)]
-    [SerializeField] private float impactWeigth;
-
+    private float impactWeigth;
     private Train train;
     private AITrainManipulator trainManipulator;
     private AITrainDefencePlaner defencePlaner;
     private DefencePlan defencePlan;
+    private RetreatDecisionStrategies.Strategy retreatStrategy;
+    [SerializeField] private float retreatTime = 5.0f;
     public void Awake()
     {
         train = GetComponent<Train>();
         trainManipulator = GetComponent<AITrainManipulator>();
-        Initialize();
     }
     public void FixedUpdate()
     {
         defencePlaner.UpdateTTI(Time.fixedDeltaTime);
-        if (defencePlan != null)
-        {
-            defencePlan.ReduceShieldDelay(Time.fixedDeltaTime);
-        }
+        defencePlan?.ReduceShieldDelay(Time.fixedDeltaTime);
     }
 
     public void Update()
@@ -35,22 +29,32 @@ public class TrainAI : AI
         PerformDefencePlan();
     }
 
-    public void Initialize()
+    public void Initialize(AITrainConfiguration configuration)
     {
         defencePlaner = new AITrainDefencePlaner(train, this, trainManipulator);
-        foreach (AICarriage aICarriage in carriages)
+        impactWeigth = configuration.GetImpactWeigth();
+        retreatStrategy = configuration.GetRetreatStrategy();
+        foreach (AITrainPartConfiguration partConfig in configuration.GetConfig())
         {
-            TrainPart instance = train.InstantiatePart(aICarriage.carriagePrefab);
-            aICarriage.SetInstance(instance);
-        }
-        foreach (AICarriage aICarriage in carriages)
-        {
-            aICarriage.Init();
-            if (aICarriage.GetActionType().Contains(AIActionType.COROUTINE))
+            TrainPart instance = train.InstantiatePart(CarriagePrefabHolder.instance.GetPrefab(partConfig.GetCarriageType()));
+            instance.SetConfiguration(partConfig);
+            instance.SetCartImportance(configuration.GetCartImportance());
+            instance.trainAI = this;
+            if (instance.GetCarriageType() != CarriageType.LOCOMOTIVE)
             {
-                StartCoroutine(aICarriage.CoroutineAction());
+                CarriagePayload carriagePayload = instance.GetCarriagePayload();
+                if (carriagePayload.GetActionType().Contains(AIActionType.COROUTINE))
+                {
+                    StartCoroutine(carriagePayload.CoroutineAction());
+                }
             }
         }
+        trainManipulator.Init();
+    }
+
+    public void FixPosition()
+    {
+        trainManipulator.FixPosition();
     }
 
     //Defence Plan
@@ -80,8 +84,7 @@ public class TrainAI : AI
         {
             if (!sa.Activated && sa.Delay < 0)
             {
-                Debug.Log("Here");
-                sa.Cart.Activate();
+                sa.Cart.EnemyActivate();
                 sa.Activate();
             }
         }
@@ -94,20 +97,6 @@ public class TrainAI : AI
 
     //Getters
 
-    public AICarriage GetAICarriageByIndex(int index)
-    {   
-        if (index < 0 || index >= carriages.Count)
-        {
-            return null;
-        }
-        return carriages[index];
-    }
-
-    public List<AIArmorCart> GetShieldCarts()
-    {
-        return carriages.FindAll(c => c.GetType() == typeof(AIArmorCart)).ConvertAll(c => (AIArmorCart)c);
-    }
-
     public float GetImpactWeigth()
     {
         return impactWeigth;
@@ -116,5 +105,25 @@ public class TrainAI : AI
     public float GetCostWeigth()
     {
         return 1.0f - impactWeigth;
+    }
+
+    public void DamageCallback()
+    {
+        if (IsRetreat())
+        {
+            Retreat();
+        }
+    }
+
+    private bool IsRetreat()
+    {
+        RetreatDecision retreatDecision = RetreatDecisionStrategies.GetDecision(retreatStrategy);
+        return train.GetLocomotive().IsDestroyed() || retreatDecision.ShouldRetreat(train);
+    }
+
+    private void Retreat()
+    {
+        LeanTween.move(gameObject, GlobalSettings.instance.enemyOutPosition.position, retreatTime)
+        .setOnComplete(() => EnemyManager.instance.EndBattle());
     }
 }

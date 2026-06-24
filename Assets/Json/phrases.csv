@@ -1,0 +1,16 @@
+Key,Russian(ru),English(en)
+engineer,Машинист,Engineer
+startGameDialogue_greeteng,"Отличное утро? Пора закинуть ещё немного угля в топку. Сегодня важный день, салага, ты помнишь?","What a great morning! It's time to put some more coal in the furnace. It's an important day, rookie, do you remember?"
+startGameDialogue_tutorialPropose,"Сегодня ты научишься управлять этим поездом. В конце концов именно ты однажды займёшь моё место.","Today you will learn how to drive this train. After all, you're the one who's going to take my place one day."
+startGameDialogue_answer_acceptTutorial,"Жду не дождусь","I can't wait"
+startGameDialogue_answer_rejectTutorial,"Я уже умею","I already can"
+startGameDialogue_prepareTutorail,"Как кстати мы наткнулись на разведывательный поезд траутов. Итак...","How coincidental that we stumbled upon the Trout reconnaissance train. Well..."
+startGameDialogue_rejectTutorial,"Неужели по ночам ты читал не комиксы, а мануалы? Похвально. А вот и твой шанс показать, что ты умеешь.","Did you really read manuals instead of comics at night? Commendable. And here's your chance to show what you can do."
+afterTutorial_congratulations,"Красавчик!","Good job!"
+drunkard,Пьяница,drunkard
+drunkard_request,Подкинь монетку...,Spare a coin
+drunkard_request_dialogue_ask,Подкинь монетку бывшему железнодорожнику,Spare a coin to a former railroad worker
+drunkard_request_dialogue_ask_answer_yes,Держи (-10 болтов),Here you go (-10 screws)
+drunkard_request_dialogue_ask_answer_no,"Проваливай, бродяга","Go away, vagabond"
+drunkard_request_dialogue_thanks,Спасибо,Thank you
+drunkard_request_dialogue_curse,"Будь ты проклят, скотина","Damn you, you bastard"

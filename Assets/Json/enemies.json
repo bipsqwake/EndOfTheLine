@@ -1,0 +1,26 @@
+{
+    "tutorialEnemy": {
+        "name": "tutorial enemy",
+        "config": {
+            "$type": "AITrainConfiguration, Assembly-CSharp",
+            "cartImportance": 10.0,
+            "impactWeigth": 0.38,
+            "retreatStrategy": "ONE_OUT",
+            "config": {
+                "$type": "System.Collections.Generic.List`1[[AITrainPartConfiguration, Assembly-CSharp]], mscorlib",
+                "$values": [
+                    {
+                        "$type": "AILocomotiveConfiguration, Assembly-CSharp",
+                        "importance": 10.0,
+                        "maxHealth": 20
+                    },
+                    {
+                        "$type": "AIPassangerCartConfiguration, Assembly-CSharp",
+                        "importance": 5.0,
+                        "maxHealth": 10
+                    }
+                ]
+            }
+        }
+    }
+}

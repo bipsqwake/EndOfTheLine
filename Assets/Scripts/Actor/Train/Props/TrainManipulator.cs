@@ -10,15 +10,13 @@ public class TrainManipulator : MonoBehaviour
     [SerializeField] private float speed;
     private int acceleration;
     private float defaultX;
+    private bool inited = false;
 
     private static Dictionary<int, float> steamSpeed = new Dictionary<int, float>() { { -1, -2 }, { 0, -3 }, { 1, -4 } };
-    public void Start()
+    public void Init()
     {
         SidesInputController.instance.leftEvent += Left;
         SidesInputController.instance.rightEvent += Right;
-        
-        defaultX = transform.position.x;
-
         Locomotive locomotive = GetComponent<Train>().GetLocomotive();
         if (locomotive == null)
         {
@@ -36,8 +34,18 @@ public class TrainManipulator : MonoBehaviour
         }
     }
 
+    public void FixPosition()
+    {
+        defaultX = transform.position.x;
+        inited = true;
+    }
+
     public void Update()
     {
+        if (!inited)
+        {
+            return;
+        }
         float targetX = defaultX + delta * acceleration;
         if (!Mathf.Approximately(targetX, transform.position.x))
         {
@@ -52,6 +60,10 @@ public class TrainManipulator : MonoBehaviour
 
     public void Right(bool pressed)
     {
+        if (!State.instance.IsPlayerControl())
+        {
+            return;
+        }
         if (pressed && acceleration == 0)
         {
             acceleration = 1;
@@ -65,6 +77,10 @@ public class TrainManipulator : MonoBehaviour
 
     public void Left(bool pressed)
     {
+        if (!State.instance.IsPlayerControl())
+        {
+            return;
+        }
         if (pressed && acceleration == 0)
         {
             acceleration = -1;

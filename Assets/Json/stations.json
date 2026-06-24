@@ -1,0 +1,16 @@
+{
+    "firstStation": {
+        "name": "First Station",
+        "prefabKey": "firstStation",
+        "quests": [
+            {
+                "characterName": "",
+                "characterRequest": "",
+                "conditions": {
+                    
+                },
+                "dialogue": ""
+            }
+        ]
+    }
+}

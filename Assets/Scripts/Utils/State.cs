@@ -4,7 +4,9 @@ public class State : MonoBehaviour
 {
     public static State instance;
 
-    [SerializeField] private Train playerTrain;
+    private Train playerTrain;
+
+    private bool playerControl = false;
 
     public void Awake()
     {
@@ -15,9 +17,24 @@ public class State : MonoBehaviour
         instance = this;
     }
 
+    public void SetPlayerTrain(Train train)
+    {
+        this.playerTrain = train;
+    }
+
     public Train GetPlayerTrain()
     {
         return playerTrain;
+    }
+
+    public bool IsPlayerControl()
+    {
+        return playerControl;
+    }
+
+    public void SetPlayerControl(bool playerControl)
+    {
+        this.playerControl = playerControl;
     }
 
 

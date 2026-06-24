@@ -9,14 +9,21 @@ public class Jumper : MonoBehaviour
 
     private float nextJumpIn = 0;
     private bool jump = false;
+    private bool active = true;
+    private Vector3 defaultPosition;
 
     public void Start()
     {
         nextJumpIn = Random.Range(periodRangeFrom, periodRangeTo);
+        defaultPosition = transform.localPosition;
     }
 
     public void Update()
     {
+        if (!active)
+        {
+            return;
+        }
         nextJumpIn -= Time.deltaTime;
         if (!jump)
         {
@@ -24,7 +31,7 @@ public class Jumper : MonoBehaviour
             {
                 jump = true;
                 nextJumpIn = timeDelta;
-                transform.position = transform.position + posDelta;
+                transform.localPosition = defaultPosition + posDelta;
             }
         }
         else
@@ -33,10 +40,22 @@ public class Jumper : MonoBehaviour
             {
                 jump = false;
                 nextJumpIn = Random.Range(periodRangeFrom, periodRangeTo);
-                transform.position = transform.position - posDelta;
+                transform.localPosition = defaultPosition;
             }
         }
         
+    }
+
+    public void SetJumperActive(bool active)
+    {
+        if (!active)
+        {
+            transform.localPosition = defaultPosition;
+        } else
+        {
+            nextJumpIn = Random.Range(periodRangeFrom, periodRangeTo);
+        }
+        this.active = active;
     }
 
 

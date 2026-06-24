@@ -58,4 +58,9 @@ public class Background : MonoBehaviour
             }
         }
     }
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
 }

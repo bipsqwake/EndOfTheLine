@@ -13,11 +13,11 @@ public class AITrainManipulator : MonoBehaviour
 
     private float targetX;
 
-    private static Dictionary<int, float> steamSpeed = new Dictionary<int, float>() { { -1, -2 }, { 0, -3 }, { 1, -4 } };
-    public void Start()
-    {
-        defaultX = transform.position.x;
+    private bool inited = false;
 
+    private static Dictionary<int, float> steamSpeed = new Dictionary<int, float>() { { -1, -2 }, { 0, -3 }, { 1, -4 } };
+    public void Init()
+    {
         Locomotive locomotive = GetComponent<Train>().GetLocomotive();
         if (locomotive == null)
         {
@@ -35,8 +35,18 @@ public class AITrainManipulator : MonoBehaviour
         }
     }
 
+    public void FixPosition()
+    {
+        defaultX = transform.position.x;
+        inited = true;
+    }
+
     public void Update()
     {
+        if (!inited)
+        {
+            return;
+        }
         float targetWorldX = defaultX + targetX;
         if (!Mathf.Approximately(targetWorldX, transform.position.x))
         {

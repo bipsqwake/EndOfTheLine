@@ -6,6 +6,17 @@ public class Cart : Actor
     [SerializeField] private DamageView damageView;
     [SerializeField] private Collider2D cartCollider;
 
+    private TrainPart trainPart;
+
+    public void Awake()
+    {
+        trainPart = GetComponentInParent<TrainPart>();
+        if (trainPart == null)
+        {
+            throw new ArgumentNullException("Cart should be a child of train part");
+        }
+    }
+
     public override void ReceiveDamage(int damage)
     {
         int healthBefore = health;
@@ -18,6 +29,7 @@ public class Cart : Actor
         {
             DestroyCart();
         } 
+        trainPart.DamageCallback();
     }
 
     public override void SetPlayerControl(bool playerControl)
@@ -34,11 +46,6 @@ public class Cart : Actor
     
     private void DestroyCart()
     {
-        TrainPart trainPart = GetComponentInParent<TrainPart>();
-        if (trainPart == null)
-        {
-            throw new ArgumentNullException("Cart should be a child of train part");
-        }
         trainPart.train.ReleaseCarriage(trainPart);
     }
 }

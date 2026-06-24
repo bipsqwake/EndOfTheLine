@@ -9,14 +9,24 @@ public class Actor : MonoBehaviour
     protected bool playerControl;
     protected bool destroyed = false;
 
-    public void Awake()
+    // public void Awake()
+    // {
+    //     health = initHealth;
+    // }
+
+    public void SetInitHealth(int health)
     {
-        health = initHealth;
+        this.initHealth = health;
+        this.health = health;
     }
 
     public virtual void ReceiveDamage(int damage)
     {
         health -= damage;
+        if (health >= 0)
+        {
+            destroyed = true;
+        }
     }
 
     public virtual void SetPlayerControl(bool playerControl)

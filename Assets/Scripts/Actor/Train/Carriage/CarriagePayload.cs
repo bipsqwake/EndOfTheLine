@@ -1,11 +1,23 @@
 using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
+using System;
 
 public abstract class CarriagePayload : Actor
 {
     [SerializeField] private DamageView damageView;
     [SerializeField] private Collider2D carriageCollider;
     [SerializeField] private Cart cart;
+    private TrainPart trainPart;
+
+    public void Awake()
+    {
+        trainPart = GetComponentInParent<TrainPart>();
+        if (trainPart == null)
+        {
+            throw new ArgumentNullException("Cart should be a child of train part");
+        }
+    }
 
 
     public override void ReceiveDamage(int damage)
@@ -20,6 +32,7 @@ public abstract class CarriagePayload : Actor
         {
             DestroyCarriage();
         }
+        trainPart.DamageCallback();
     }
 
     public override void SetPlayerControl(bool playerControl)
@@ -27,6 +40,9 @@ public abstract class CarriagePayload : Actor
         base.SetPlayerControl(playerControl);
         carriageCollider.gameObject.layer = playerControl ? GlobalSettings.instance.playerLayer : GlobalSettings.instance.enemyLayer;
     }
+
+    public abstract void SetConfiguration(TrainPartConfiguration configuration);
+    public abstract void SetConfiguration(AITrainPartConfiguration configuration);
     
 
     private void DestroyCarriage()
@@ -40,4 +56,13 @@ public abstract class CarriagePayload : Actor
         damageView.gameObject.SetActive(false);
         destroyed = true; 
     }
+
+    public virtual IEnumerator CoroutineAction()
+    {
+        yield return null;
+    }
+
+    public abstract AIActionType[] GetActionType();
+
+    public abstract float GetImportance();
 }

@@ -52,12 +52,12 @@ public class DefencePlan
 
     public class ShieldActivation
     {
-        public AIArmorCart Cart {get;}
+        public ArmorCart Cart {get;}
         public float Delay {get; private set;}
 
         public bool Activated {get; private set;}
 
-        public ShieldActivation(AIArmorCart cart, float delay)
+        public ShieldActivation(ArmorCart cart, float delay)
         {
             this.Cart = cart;
             this.Delay = delay;
@@ -71,7 +71,7 @@ public class DefencePlan
 
         public override string ToString()
         {
-            return "Cart " + Cart.carriagePrefab.name + "; delay " + Delay;
+            return "Cart " + Cart.name + "; delay " + Delay;
         }
 
         public void Activate()

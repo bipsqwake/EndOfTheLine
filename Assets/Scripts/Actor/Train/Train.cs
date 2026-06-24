@@ -7,23 +7,30 @@ public class Train : MonoBehaviour
     [SerializeField] private List<TrainPart> carriages;
     [SerializeField] private ReleasedPart releasedPartPrefab;
     [SerializeField] private bool playerControl;
+    private TrainManipulator trainManipulator;
     private Locomotive locomotive;
     private List<TrainPart> parts = new List<TrainPart>();
 
+    private float jumperThreshold = 5f;
+
     public void Awake()
     {
-        if (playerControl)
-        {
-            InstantiateParts(carriages);
-        }
+        trainManipulator = GetComponent<TrainManipulator>();
     }
 
-    public void InstantiateParts(List<TrainPart> prefabs)
+    public void InitializeFromConfiguration(TrainConfiguration trainConfiguration) 
     {
-        foreach (var carriage in carriages)
+        foreach (TrainPartConfiguration partConfig in trainConfiguration.GetConfigList())
         {
-            InstantiatePart(carriage);
+            TrainPart instance = InstantiatePart(CarriagePrefabHolder.instance.GetPrefab(partConfig.GetCarriageType()));
+            instance.SetConfiguration(partConfig);
         }
+        trainManipulator.Init();
+    }
+
+    public void FixPosition()
+    {
+        trainManipulator.FixPosition();
     }
 
     public TrainPart InstantiatePart(TrainPart prefab)
@@ -110,5 +117,36 @@ public class Train : MonoBehaviour
             max = Mathf.Max(part.transform.position.y + part.GetCartView().size.y, max);
         }
         return max - 0.1f;
+    }
+
+    public TrainPart GetTrainPartByIndex(int index) 
+    {
+        if (index < 0 || index >= parts.Count)
+        {
+            return null;
+        }
+        return parts[index];
+    }
+
+    public List<ArmorCart> GetShieldCarts()
+    {
+        return parts.FindAll(c => c.GetCarriageType() == CarriageType.SHIELD).ConvertAll(c => (ArmorCart)c.GetCarriagePayload());
+    }
+
+    public void SetSpeed(float speed)
+    {
+        locomotive.SetSpeed(speed);
+        SetJumpersActive(speed > jumperThreshold);
+
+    }
+
+    public void SetMoving(bool moving)
+    {
+        locomotive.SetSteamActive(moving);
+    }
+
+    private void SetJumpersActive(bool active)
+    {
+        parts.ForEach(p => p.GetComponent<Jumper>()?.SetJumperActive(active));
     }
 }

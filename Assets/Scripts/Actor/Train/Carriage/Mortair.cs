@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,8 @@ public class Mortair : CarriagePayload
     [SerializeField] private float angleAmp;
     [SerializeField] private SpriteRenderer view;
     [SerializeField] private AudioClip shotSound;
-    [SerializeField] private float reloadTime;
+    private MortairConfiguration playerConfiguration;
+    private AIMortairConfiguration enemyConfiguration;
 
     private float gunY = 0.5f;
 
@@ -21,7 +23,7 @@ public class Mortair : CarriagePayload
     }
     public void PrepareAttack(Vector2 aimPosition)
     {
-        if (!playerControl || !reloadBar.IsReady())
+        if (!State.instance.IsPlayerControl() || !playerControl || !reloadBar.IsReady())
         {
             return;
         }
@@ -32,7 +34,7 @@ public class Mortair : CarriagePayload
     //for player attacks
     public void PerformAttack(Vector2 aimPosition)
     {
-        if (!playerControl || !reloadBar.IsReady())
+        if (!State.instance.IsPlayerControl() || !playerControl || !reloadBar.IsReady())
         {
             return;
         }
@@ -43,7 +45,7 @@ public class Mortair : CarriagePayload
         else
         {
             aim.InstantClose();
-            reloadBar.Reload(reloadTime);
+            reloadBar.Reload(playerConfiguration.GetReloadTime());
             SoundManager.instance.Play(shotSound);
             Projectile projectile = Instantiate(projectilePrefab);
             projectile.transform.position = transform.position + Vector3.up * gunY;
@@ -87,5 +89,83 @@ public class Mortair : CarriagePayload
     private int GetTargetLayer()
     {
         return playerControl ? GlobalSettings.instance.enemyLayer : GlobalSettings.instance.playerLayer;
+    }
+
+    public override void SetConfiguration(TrainPartConfiguration configuration)
+    {
+        if (configuration.GetType() != typeof(MortairConfiguration))
+        {
+            return;
+        }
+        playerConfiguration = (MortairConfiguration) configuration;
+        SetInitHealth(playerConfiguration.GetMaxHealth());
+        return;
+    }
+
+    public override void SetConfiguration(AITrainPartConfiguration configuration)
+    {
+        if (configuration.GetType() != typeof(AIMortairConfiguration))
+        {
+            return;
+        }
+        enemyConfiguration = (AIMortairConfiguration) configuration;
+        SetInitHealth(enemyConfiguration.GetMaxHealth());
+        return;
+    }
+
+    public override AIActionType[] GetActionType()
+    {
+        return new AIActionType[] {AIActionType.COROUTINE};
+    }
+
+    public override IEnumerator CoroutineAction()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(enemyConfiguration.GetMinStartDelay(), enemyConfiguration.GetMaxStartDelay()));
+        while (IsDestroyed())
+        {
+            // AttackCycle();
+            yield return new WaitForSeconds(UnityEngine.Random.Range(enemyConfiguration.GetMinReloadTime(), enemyConfiguration.GetMaxReloadTime()));
+        }
+    }
+
+    private void AttackCycle()
+    {
+        Actor target = SelectTarget();
+        Vector3 targetCoord = SelectTargetCoord(target);
+        PerformTargetAttack(targetCoord);
+    }
+
+    private Actor SelectTarget()
+    {
+        Dictionary<Actor, int> playerWeigth = PlayerTargetSelectorStrategies.GetSelector(enemyConfiguration.GetStrategy()).GetPlayerTrainWeght();
+        int sum = 0;
+        foreach (var part in playerWeigth)
+        {
+            sum += part.Value;
+        }
+        int rand = UnityEngine.Random.Range(0, sum);
+        foreach (var part in playerWeigth)
+        {
+            if (rand < part.Value)
+            {
+                return part.Key;
+            }
+            rand -= part.Value;
+        }
+        return null;
+    }
+
+    private Vector3 SelectTargetCoord(Actor target)
+    {
+        if (target == null)
+        {
+            throw new ArgumentNullException("Target should not be null");
+        }
+        return target.transform.position;
+    }
+
+    public override float GetImportance()
+    {
+        return enemyConfiguration.GetImportance();
     }
 }

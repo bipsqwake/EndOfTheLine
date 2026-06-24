@@ -1,0 +1,47 @@
+{
+    "startGameDialogue": {
+        "initPhrase": "startGameDialogue_greeteng",
+        "phrases": {
+            "startGameDialogue_greeteng" : {
+                "text": "startGameDialogue_greeteng",
+                "speaker": "engineer",
+                "nextPhrase": "startGameDialogue_tutorialPropose"
+            },
+            "startGameDialogue_tutorialPropose": {
+                "text": "startGameDialogue_tutorialPropose",
+                "speaker": "engineer",
+                "answers": {
+                    "startGameDialogue_answer_acceptTutorial": {
+                        "text": "startGameDialogue_answer_acceptTutorial",
+                        "nextPhrase": "startGameDialogue_prepareTutorail"
+                    },
+                    "startGameDialogue_answer_rejectTutorial": {
+                        "text": "startGameDialogue_answer_rejectTutorial",
+                        "nextPhrase": "startGameDialogue_rejectTutorial",
+                        "addMarker": ["rejectTutorial"]
+                    }
+                }
+            },
+            "startGameDialogue_prepareTutorail": {
+                "text": "startGameDialogue_prepareTutorail",
+                "speaker": "engineer",
+                "final": true
+            },
+            "startGameDialogue_rejectTutorial": {
+                "text": "startGameDialogue_rejectTutorial",
+                "speaker": "engineer",
+                "final": true
+            }
+        }
+    },
+    "afterTutorial": {
+        "initPhrase": "afterTutorial_congratulations",
+        "phrases": {
+            "afterTutorial_congratulations": {
+                "text": "afterTutorial_congratulations",
+                "speaker": "engineer",
+                "final": true
+            }
+        }
+    }
+}

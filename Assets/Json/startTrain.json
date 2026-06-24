@@ -1,0 +1,26 @@
+{
+    "$type": "TrainConfiguration, Assembly-CSharp",
+    "configList": {
+        "$type": "System.Collections.Generic.List`1[[TrainPartConfiguration, Assembly-CSharp]], mscorlib",
+        "$values": [
+            {
+                "$type": "LocomotiveConfiguration, Assembly-CSharp",
+                "maxHealth": 30
+            },
+            {
+                "$type": "PassangerCartConfiguration, Assembly-CSharp",
+                "maxHealth": 30
+            },
+            {
+                "$type": "PassangerCartConfiguration, Assembly-CSharp",
+                "maxHealth": 30
+            },
+            {
+                "$type": "MortairConfiguration, Assembly-CSharp",
+                "reloadTime": 5.0,
+                "damage": 10,
+                "maxHealth": 30
+            }
+        ]
+    }
+}
